@@ -25,9 +25,8 @@ import {
         @Post()
         public async createCreateApp(
           @Body() requestBody: CreateAppParams
-        ): Promise<void> {
+        ): Promise<CreateAppParams> {
           this.setStatus(201); // set return status 201
-          new CreateAppService().create(requestBody);
-          return;
+          return new CreateAppService().create(requestBody);
         }
       }
