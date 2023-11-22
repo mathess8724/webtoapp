@@ -41,6 +41,7 @@ exports.app = void 0;
 const routes_1 = require("../build/routes");
 const express_1 = __importStar(require("express"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const path_1 = __importDefault(require("path"));
 exports.app = (0, express_1.default)();
 // Use body parser to read sent json payloads
 exports.app.use((0, express_1.urlencoded)({
@@ -49,5 +50,9 @@ exports.app.use((0, express_1.urlencoded)({
 exports.app.use("/docs", swagger_ui_express_1.default.serve, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.send(swagger_ui_express_1.default.generateHTML(yield Promise.resolve().then(() => __importStar(require("../build/swagger.json")))));
 }));
+exports.app.use(express_1.default.static(path_1.default.join(__dirname, "../webApp/webtoappconverter/build")));
+exports.app.get("*", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../webApp/webtoappconverter/build", "index.html"));
+});
 exports.app.use((0, express_1.json)());
 (0, routes_1.RegisterRoutes)(exports.app);
