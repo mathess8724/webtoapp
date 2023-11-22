@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { CreateAppParams } from "../src/createApp/createAppService";
+import { ExpoConfig, jsonBase } from "./types/types";
 
 const createDirectory = (name: string) => {
     const dirPath = path.join(__dirname, '../src', name);
@@ -70,6 +72,20 @@ const createDirectory = (name: string) => {
 
     console.log(`Directory and files created at ${dirPath}`);
 };
+
+export const prepareApp = (payload: CreateAppParams) => {
+    const jsonFile: ExpoConfig = {
+        ...jsonBase,
+        expo: {
+            ...jsonBase.expo,
+            name: payload.name
+        }
+    }
+    const dirPath = path.join(__dirname, '../src');
+    console.log(dirPath);
+    //fs.writeFileSync(path.join(dirPath, (name +'.ts')), interfaceContent);
+
+}
 
 const main = () => {
     const args = process.argv.slice(2);

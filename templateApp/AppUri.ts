@@ -1,0 +1,1 @@
+export const appUri: string = "https://www.sixtynorte.com/"
